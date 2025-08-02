@@ -73,18 +73,30 @@ export const getAllAstrologers = async (req, res) => {
 };
 
 
-export const getAstrologerProfile = async(req,res)=>{
-  const astrologerId = req.userId
-  
+export const getAstrologerProfile = async (req, res) => {
+  const astrologerId = req.userId;
+
   try {
-    const astrologer = await Astrologer.findById(astrologerId)  
-    if(!astrologer){
+    const astrologer = await Astrologer.findById(astrologerId).select("-password");
+    if (!astrologer) {
       return res.status(404).json({ success: false, message: "Astrologer not Found" });
     }
-    const {password, ...rest} = astrologer._doc 
-    const appointments = await Booking.find({astrologer:astrologerId}) 
-    res.status(200).json({ success: true, message: "Getting profile info", data:{...rest, appointments} });
+
+    const appointments = await Booking.find({ astrologer: astrologerId })
+      .populate("user", "name email photo gender") // ✅ This populates the user details
+      .lean();
+
+    res.status(200).json({
+      success: true,
+      message: "Getting profile info",
+      data: {
+        ...astrologer._doc,
+        appointments,
+      },
+    });
   } catch (err) {
+    console.error("Error in getAstrologerProfile:", err);
     res.status(500).json({ success: false, message: "Something went wrong" });
   }
-}
+};
+

@@ -9,6 +9,15 @@ router.get('/profile/me', authenticate, restrict(['astrologer']), getAstrologerP
 router.get('/:id', getOneAstrologer)
 router.get('/', getAllAstrologers)
 router.put('/:id', authenticate, restrict(["astrologer"]), updateAstrologer)
+router.delete('/profile/me', authenticate, restrict(['astrologer']), async (req, res) => {
+  try {
+    await Astrologer.findByIdAndDelete(req.userId);
+    res.status(200).json({ success: true, message: 'Astrologer deleted successfully' });
+  } catch (err) {
+    res.status(500).json({ success: false, message: 'Failed to delete astrologer account' });
+  }
+});
+
 router.delete('/:id', authenticate, restrict(["astrologer"]), deleteAstrologer)
 
 

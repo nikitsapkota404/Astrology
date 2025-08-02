@@ -41,10 +41,11 @@ const Home = () => {
                   who grew up wild, free, and full of chaos... but look at us
                   now! 🌟”
                 </p>
-
+                <Link to="/astrologers">
                 <button className="btn mt-8 shadow-lg shadow-purple-200 hover:shadow-purple-300 transition-all duration-300 transform hover:-translate-y-1">
                   Book Appointment
                 </button>
+                </Link>
                 <Link to="/services">
                   <button className="btn mt-8 ml-10 shadow-lg shadow-purple-200 hover:shadow-purple-300 transition-all duration-300 transform hover:-translate-y-1">
                     See Astrological Services

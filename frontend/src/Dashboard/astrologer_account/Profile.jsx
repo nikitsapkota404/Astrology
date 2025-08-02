@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from "react";
-import { BASE_URL, token } from "../../../config";
+import { BASE_URL } from "../../../config";
 import { toast } from "react-toastify";
 import { AiOutlineDelete, AiOutlinePlus } from "react-icons/ai";
-import uploadImageToCloudinary from './../../utils/uploadCloud'
-const Profile = ({astrologersData}) => {
+import uploadImageToCloudinary from './../../utils/uploadCloud';
+
+const Profile = ({ astrologersData }) => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
-    password:"",
+    password: "",
     phone: "",
     bio: "",
     gender: "",
@@ -20,7 +21,7 @@ const Profile = ({astrologersData}) => {
       { startingDate: "", endingDate: "", position: "", office: "" },
     ],
     timeSlots: [{ day: "", startingTime: "", endingTime: "" }],
-    about: [],
+    about: "",
     photo: null,
   });
 
@@ -42,7 +43,7 @@ const Profile = ({astrologersData}) => {
       timeSlots: astrologersData?.timeSlots?.length
         ? astrologersData.timeSlots
         : [{ day: "", startingTime: "", endingTime: "" }],
-      about: astrologersData?.about || [],
+      about: astrologersData?.about || "",
       photo: astrologersData?.photo || null,
     });
   }, [astrologersData]);
@@ -51,33 +52,49 @@ const Profile = ({astrologersData}) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleFileInputChange = async event => {
+  const handleFileInputChange = async (event) => {
     const file = event.target.files[0];
-    const data = await uploadImageToCloudinary(file)
-
-    setFormData({ ...formData, photo:data?.url})
+    const data = await uploadImageToCloudinary(file);
+    setFormData({ ...formData, photo: data?.url });
   };
 
   const updateProfileHandler = async (e) => {
     e.preventDefault();
 
     try {
-        const res=await fetch(`${BASE_URL}/astrologers/${astrologersData._id}`,{
-          method:'PUT',
-          headers:{
-            'content-type':'application/json',
-            Authorization:`Bearer ${token}`
-          },
-          body:JSON.stringify(formData)
-        })
-        const result = await res.json();
-        if(!res.ok){
-          throw Error(result.message)
+      const token = localStorage.getItem("token"); // get fresh token here
+      if (!token) {
+        toast.error("Authentication token missing. Please login.");
+        return;
+      }
+
+      const res = await fetch(`${BASE_URL}/astrologers/${astrologersData._id}`, {
+        method: "PUT",
+        headers: {
+          "content-type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (res.status === 401) {
+        const errorData = await res.json();
+        if (errorData.message && errorData.message.toLowerCase().includes("token is expired")) {
+          localStorage.removeItem("token");
+          toast.error("Session expired. Please login again.");
+          return;
         }
-        toast.success(result.message)
+      }
+
+      const result = await res.json();
+
+      if (!res.ok) {
+        throw new Error(result.message);
+      }
+
+      toast.success(result.message);
     } catch (err) {
-      toast.error(err.message)
-      
+      toast.error(err.message);
     }
   };
 
@@ -87,6 +104,7 @@ const Profile = ({astrologersData}) => {
       [key]: [...prevFormData[key], item],
     }));
   };
+
   const handleReusableInputChange = (key, index, event) => {
     const { name, value } = event.target;
     setFormData((prevFormData) => {

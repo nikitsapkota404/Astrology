@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { AiFillStar } from "react-icons/ai";
 import { useParams } from "react-router-dom";
-import { BASE_URL, token } from "../../../config";
+import { BASE_URL } from "../../../config";
 import RingLoader from "react-spinners/RingLoader";
 import { toast } from "react-toastify";
 
@@ -14,35 +14,58 @@ const FeedbackForm = () => {
   const {id} = useParams()
   
   const handleSubmitReview = async e => {
-    e.preventDefault();
-    setLoading(true)
+  e.preventDefault();
+  setLoading(true);
 
-    try {
-      if(!rating || !reviewText){
-        setLoading(false)
-         return toast.error("Rating and Review Fields are required.")
-      }
-      const res = await fetch(`${BASE_URL}/astrologers/${id}/reviews`,{
-        method:'post',
-        headers:{
-          'Content-type':'application/json',
-          Authorization:`Bearer ${token}`
-        },
-        body:JSON.stringify({rating, reviewText})
-      })
-
-      const result = await res.json()
-
-      if(!res.ok){
-        throw new Error(result.message)
-      }
-      setLoading(false)
-      toast.success(result.message)
-    } catch (err) {
-        setLoading(false)
-        toast.error(err.message)
+  try {
+    if (!rating || !reviewText) {
+      setLoading(false);
+      return toast.error("Rating and Review Fields are required.");
     }
+
+    const token = localStorage.getItem('token');  // <---- Add this here
+
+    if (!token) {
+      setLoading(false);
+      toast.error("You must be logged in to submit feedback.");
+      // Optional: redirect to login page
+      window.location.href = '/login';
+      return;
+    }
+
+    const res = await fetch(`${BASE_URL}/astrologers/${id}/reviews`, {
+      method: 'post',
+      headers: {
+        'Content-type': 'application/json',
+        Authorization: `Bearer ${token}`,  // use fresh token here
+      },
+      body: JSON.stringify({ rating, reviewText }),
+    });
+
+    if (res.status === 401) {
+      const errorData = await res.json();
+      if (errorData.message && errorData.message.toLowerCase().includes('token is expired')) {
+        localStorage.removeItem('token');
+        toast.error('Session expired. Please login again.');
+        window.location.href = '/login';
+        return;
+      }
+    }
+
+    const result = await res.json();
+
+    if (!res.ok) {
+      throw new Error(result.message || 'Failed to submit review');
+    }
+
+    setLoading(false);
+    toast.success(result.message);
+  } catch (err) {
+    setLoading(false);
+    toast.error(err.message);
   }
+};
+
   
   return (
     <form className="bg-white p-6 rounded-lg shadow-sm">
