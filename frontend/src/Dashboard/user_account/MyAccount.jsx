@@ -6,10 +6,13 @@ import useGetProfile from "../../hooks/useFetchData";
 import { BASE_URL } from "../../../config";
 import Loading from "../../components/Loader/Loading";
 import Error from "../../components/Error/Error";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const MyAccount = () => {
   const { dispatch } = useContext(AuthContext);
   const [tab, setTab] = useState("bookings");
+  const navigate = useNavigate();
 
   const {
     data: userData,
@@ -21,9 +24,36 @@ const MyAccount = () => {
     dispatch({ type: "LOGOUT" });
   };
 
-  const handleDelete = () => {
-    // Add delete logic here (e.g., API call or modal confirmation)
-    alert("Account delete clicked");
+  const handleDelete = async () => {
+    if (!window.confirm("Are you sure you want to delete your account? This action cannot be undone.")) {
+      return;
+    }
+
+    const token = localStorage.getItem("token");
+    if (!token) {
+      alert("You need to be logged in to delete your account.");
+      return;
+    }
+
+    try {
+      const res = await axios.delete(`${BASE_URL}/users/profile/me`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      if (res.status === 200 || res.status === 204) {
+        alert(res.data.message || "Account deleted successfully.");
+        localStorage.removeItem("token");
+        dispatch({ type: "LOGOUT" });
+        navigate("/");
+      } else {
+        alert("Failed to delete account.");
+      }
+    } catch (error) {
+      console.error("Error deleting account:", error);
+      alert("Something went wrong while deleting your account.");
+    }
   };
 
   const handleTabClick = (action) => {

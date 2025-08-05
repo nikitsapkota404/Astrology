@@ -1,17 +1,18 @@
 import Review from './../models/ReviewSchema.js'
 import Astrologer from './../models/AstrologerSchema.js'
 
-export const getAllReviews = async (req,res) => {
-        try {
-            const reviews = await Review.find({})
-            res.status(200).json({success:true, message:"Sucessful", data:reviews})
-
-        } catch (err) {
-            res.status(404).json({success:false, message:"Not Found"})
-            
-        }
-    
-}
+export const getAllReviews = async (req, res) => {
+  try {
+    const reviews = await Review.find()
+      .populate('user', 'name')
+      .populate('astrologer', 'name')
+      .select('reviewText');
+    res.json({ success: true, message: 'Successful', data: reviews });
+  } catch (error) {
+    console.error('Error fetching reviews:', error);
+    res.status(500).json({ success: false, message: 'Failed to fetch reviews' });
+  }
+};
 
 export const createReview = async (req,res) => {
     if(!req.body.astrologer) req.body.astrologer = req.params.astrologerId

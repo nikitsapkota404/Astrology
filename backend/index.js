@@ -10,6 +10,8 @@ import astrologerRoute from './Routes/astrologer.js';
 import reviewRoute from './Routes/review.js';
 import bookingRoute from './Routes/booking.js';
 import muhuratRoute from './Routes/muhurat.js';
+import contactRoutes from './Routes/contactRoutes.js';
+import adminRoutes from "./Routes/adminRoutes.js";
 
 const app = express();
 const port = process.env.PORT || 8000;
@@ -72,6 +74,10 @@ app.use('/api/v1/astrologers', astrologerRoute);
 app.use('/api/v1/reviews', reviewRoute);
 app.use('/api/v1/bookings', bookingRoute);
 app.use('/api/v1/muhurat', muhuratRoute);
+app.use(express.json());
+app.use('/api', contactRoutes);
+app.use("/api/v1/admin", adminRoutes);
+
 
 
 // 404 error handling (If no matching route)

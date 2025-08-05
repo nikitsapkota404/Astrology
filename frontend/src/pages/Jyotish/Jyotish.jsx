@@ -28,13 +28,13 @@ const Jyotish = () => {
 
   return (
     <>
-      <section className="bg-gradient-to-b from-[#fff9ea] to-[#fffcf3] py-8">
+      <section className="py-8">
         <div className="container text-center">
-          <h2 className="heading relative inline-block">
-            <span className="relative z-10">Find an astrologer</span>
-            <span className="absolute bottom-0 left-0 w-full h-3 bg-yellow-200 opacity-40 z-0"></span>
+          <h2 className="heading relative">
+            <span className="relative text-white z-10">Find an astrologer</span>
+            
           </h2>
-          <div className="max-w-[570px] mt-[30px] mx-auto bg-white rounded-lg shadow-lg flex items-center justify-between overflow-hidden border border-[#0066ff1a]">
+          <div className="max-w-[570px] mt-[30px] mx-auto  rounded-lg shadow-lg flex items-center justify-between overflow-hidden border border-white text-white">
             <input
               type="search"
               className="py-4 pl-6 pr-2 bg-transparent w-full focus:outline-none placeholder:text-textColor"
@@ -49,7 +49,7 @@ const Jyotish = () => {
         </div>
       </section>
 
-      <section className="py-12 bg-white">
+      <section className="py-12">
         <div className="container">
         {loading && <Loader/>}
         {error && <Error/>}
@@ -65,14 +65,14 @@ const Jyotish = () => {
       
       <JyotishDetails />
 
-      <section className="py-16 bg-gradient-to-b from-[#f9f9ff] to-white">
+      <section className="py-16">
         <div className="container">
           <div className="xl:w-[550px] mx-auto">
-            <h2 className="heading text-center relative inline-block">
+            <h2 className="heading text-center text-white relative inline-block px-[1em]">
               <span className="relative z-10">What our clients say</span>
-              <span className="absolute bottom-0 left-0 w-full h-3 bg-purple-200 opacity-40 z-0"></span>
+             
             </h2>
-            <p className="text__para text-center mt-4">
+            <p className="text__para text-center text-white mt-4">
               We provide world-renowned astrology services powered by expert
               knowledge and innovative technology.
             </p>

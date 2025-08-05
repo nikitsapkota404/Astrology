@@ -4,6 +4,9 @@ import heroImg02 from "../assets/images/mulla.jpg";
 import icon01 from "../assets/images/icon01.png";
 import icon02 from "../assets/images/icon02.png";
 import icon03 from "../assets/images/icon03.png";
+import Image01 from "../assets/webimg/image04.webp";
+import Image02 from "../assets/webimg/image001.webp";
+
 import { Link } from "react-router-dom";
 import { BsArrowRight } from "react-icons/bs";
 import {
@@ -12,7 +15,7 @@ import {
   CalendarDaysIcon,
 } from "@heroicons/react/24/outline";
 import About from "../components/About/About";
-import ServiceList from "../components/services/serviceList";
+import ServiceList from "../components/services/ServiceList";
 import featureImg from "../assets/images/nikiy.jpg";
 import chatIcon from "../assets/images/bubble-chat.png";
 import avatarIcon from "../assets/images/nikiy.jpg";
@@ -25,27 +28,26 @@ const Home = () => {
   return (
     <>
       {/* herosec */}
-      <section className="hero_section pt-[60px] 2xl:h-[800px] bg-gradient-to-b from-purple-200 to-transparent">
-        <div className="container">
+      <section className="hero_section pt-[50px] 2xl:h-[800px] mx-[5em]">
+        <div className="container flex gap-[2em]">
           <div className="flex flex-col lg:flex-row gap-[90px] items-center justify-between">
             {/* herocontent */}
             <div>
               <div className="lg:w-[570px]">
-                <h1 className="text-[36px] leading-[46px] text-headingColor font-[800] md:text-[60px] md:leading-[70px] bg-clip-text text-transparent bg-blue-900">
+                <h1 className="text-[30px] leading-[46px] text-white font-[700] md:text-[60px] md:leading-[70px] bg-clip-text ">
                   We are here to serve you your own destiny.
                 </h1>
-                <p className="text__para mt-8">
+                <p className="text__para text-white mt-8">
                   “Our astrological services are so good, you'll find yourself
                   saying ‘Wow, I actually loved that!’ 😂 You might even be
                   surprised to know — this entire website was built by someone
                   who grew up wild, free, and full of chaos... but look at us
                   now! 🌟”
                 </p>
-                <Link to="/astrologers">
+
                 <button className="btn mt-8 shadow-lg shadow-purple-200 hover:shadow-purple-300 transition-all duration-300 transform hover:-translate-y-1">
                   Book Appointment
                 </button>
-                </Link>
                 <Link to="/services">
                   <button className="btn mt-8 ml-10 shadow-lg shadow-purple-200 hover:shadow-purple-300 transition-all duration-300 transform hover:-translate-y-1">
                     See Astrological Services
@@ -56,9 +58,9 @@ const Home = () => {
               {/* hero counter */}
               <div className="mt-[10px] lg:mt-[40px] grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {/* Astrologers */}
-                <div className="p-8 bg-gradient-to-br from-purple-100 to-white border border-purple-200 rounded-3xl shadow-md hover:shadow-xl transition-all duration-300 text-center">
-                  <UserGroupIcon className="w-10 h-10 text-purple-600 mx-auto mb-3" />
-                  <h2 className="text-[36px] font-bold text-purple-700">
+                <div className="p-3 bg-gradient-to-br from-purple-100 to-white border  border-purple-200 rounded-3xl shadow-md hover:shadow-xl transition-all duration-300 text-center h-[20vh]">
+                  <UserGroupIcon className="w-10 h-7 text-purple-600 mx-auto mb-3" />
+                  <h2 className="text-[30px] font-bold text-purple-700">
                     200+
                   </h2>
                   <p className="text-gray-600 font-medium">
@@ -67,9 +69,9 @@ const Home = () => {
                 </div>
 
                 {/* Experience */}
-                <div className="p-8 bg-gradient-to-br from-yellow-100 to-white border border-yellow-200 rounded-3xl shadow-md hover:shadow-xl transition-all duration-300 text-center">
-                  <CalendarDaysIcon className="w-10 h-10 text-yellow-500 mx-auto mb-3" />
-                  <h2 className="text-[36px] font-bold text-yellow-600">
+                <div className="p-3 bg-gradient-to-br from-purple-100 to-white border  border-purple-200 rounded-3xl shadow-md hover:shadow-xl transition-all duration-300 text-center h-[20vh]">
+                  <CalendarDaysIcon className="w-10 h-7 text-yellow-500 mx-auto mb-3" />
+                  <h2 className="text-[30px] font-bold text-yellow-600">
                     20+ Years
                   </h2>
                   <p className="text-gray-600 font-medium">
@@ -78,9 +80,9 @@ const Home = () => {
                 </div>
 
                 {/* Satisfaction */}
-                <div className="p-8 bg-gradient-to-br from-green-100 to-white border border-green-200 rounded-3xl shadow-md hover:shadow-xl transition-all duration-300 text-center">
-                  <FaceSmileIcon className="w-10 h-10 text-green-500 mx-auto mb-3" />
-                  <h2 className="text-[36px] font-bold text-green-600">100%</h2>
+                <div className="p-3 bg-gradient-to-br from-purple-100 to-white border  border-purple-200 rounded-3xl shadow-md hover:shadow-xl transition-all duration-300 text-center h-[20vh]">
+                  <FaceSmileIcon className="w-10 h-7 text-green-500 mx-auto mb-3" />
+                  <h2 className="text-[30px] font-bold text-green-600">100%</h2>
                   <p className="text-gray-600 font-medium">
                     Client Satisfaction
                   </p>
@@ -89,33 +91,28 @@ const Home = () => {
             </div>
 
             {/* herocontent */}
-            <div className="flex gap-[30px] justify-end">
-              <div className="w-[200px] md:w-[250px] lg:w-[300px] transform -rotate-3 transition-transform duration-300 hover:rotate-0">
-                <img
-                  className="w-full h-auto object-cover rounded-2xl shadow-xl"
-                  src={heroImg01}
+            <div className="h-[90vh] w-[35vw] overflow-hidden rounded-2xl  group">
+               <img
+               className="rounded-[3em] shadow-2xl shadow-black-700 border border-black  filter brightness-75 contrast-90 saturate-75"
+                 src={Image01}
                   alt=""
-                />
-              </div>
-
-              <div className="mt-[30px] w-[200px] md:w-[250px] lg:w-[300px] transform rotate-3 transition-transform duration-300 hover:rotate-0">
-                <img
-                  src={heroImg02}
-                  alt=""
-                  className="w-full h-auto object-cover mb-[30px] rounded-2xl shadow-xl"
-                />
-              </div>
+                   style={{
+                           borderBottomLeftRadius: '9em',
+                            borderBottomRightRadius: '9em',
+                          }}
+                    />
+              
             </div>
           </div>
         </div>
       </section>
       {/* herosec end */}
-      <section className="py-16 mt-5 bg-indigo-50">
+      <section className="py-16 mt-5 ">
         <div className="container">
           <div className="lg:w-[470px] mx-auto">
-            <h2 className="heading text-center relative">
+            <h2 className="heading text-center relative text-white">
               <span className="relative z-10">Providing best astrology</span>
-              <span className="absolute bottom-0 left-0 w-full h-3 bg-purple-200 opacity-40 z-0"></span>
+              <span className="absolute bottom-0 left-0 w-full  opacity-40 z-0"></span>
             </h2>
             <p className="text__para text-center mt-4">
               World class astrological services. Our system provides unmatched,
@@ -124,7 +121,7 @@ const Home = () => {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 lg:gap-[30px] mt-[30px] lg:mt-[55px]">
-            <div className="py-[30px] px-5 bg-white rounded-xl shadow-md hover:shadow-xl transition-shadow duration-300 transform hover:-translate-y-2">
+            <div className="py-[30px] px-5 bg-white rounded-xl shadow-md- hover:shadow-xl transition-shadow duration-300 transform hover:-translate-y-2">
               <div className="flex items-center justify-center">
                 <img
                   src={icon01}
@@ -203,14 +200,14 @@ const Home = () => {
       <About />
 
       {/* services */}
-      <section className="py-16 bg-gradient-to-b from-white to-purple-50">
+      <section className="py-16 ">
         <div className="container">
           <div className="xl:w-[550px] mx-auto">
-            <h2 className="heading text-center relative">
+            <h2 className="heading text-center text-white relative">
               <span className="relative z-10">Our Astrological Services</span>
-              <span className="absolute bottom-0 left-0 w-full h-3 bg-purple-200 opacity-40 z-0"></span>
+            
             </h2>
-            <p className="text__para text-center mt-4">
+            <p className="text__para text-center text-white mt-4">
               World class astrological services. Our system provides unmatched,
               expert based astrological services.
             </p>
@@ -222,32 +219,32 @@ const Home = () => {
       {/* services end */}
 
       {/* features */}
-      <section className="py-16 bg-white">
+      <section className="py-16 ">
         <div className="container">
           <div className="flex items-center justify-between flex-col lg:flex-row">
             <div className="xl:w-[670px]">
-              <h2 className="heading relative">
+              <h2 className="heading relative text-white ">
                 <span className="relative z-10">
                   Get Virtual Service <br />
                   anytime.
                 </span>
-                <span className="absolute bottom-0 left-0 w-full h-3 bg-purple-200 opacity-40 z-0"></span>
+               
               </h2>
-              <ul className="pl-4 mt-8">
-                <li className="text__para mb-3 flex items-center">
+              <ul className="pl-4 mt-8 text-white">
+                <li className="text__para mb-3 flex items-center px-[3em]">
                   <span className="w-8 h-8 bg-purple-100 rounded-full flex items-center justify-center mr-3 text-purple-600 font-bold">
                     1
                   </span>
                   Schedule the Appointment Directly.
                 </li>
-                <li className="text__para mb-3 flex items-center">
+                <li className="text__para mb-3 flex items-center px-[3em]">
                   <span className="w-8 h-8 bg-purple-100 rounded-full flex items-center justify-center mr-3 text-purple-600 font-bold">
                     2
                   </span>
                   Search for your astrologer and contact their office.
                 </li>
-                <li className="text__para mb-3 flex items-center">
-                  <span className="w-8 h-8 bg-purple-100 rounded-full flex items-center justify-center mr-3 text-purple-600 font-bold">
+                <li className="text__para mb-3 flex items-center px-[3em]">
+                 <span className="w-8 h-8 bg-purple-100 rounded-full flex items-center justify-center mr-3 text-purple-600 font-bold">
                     3
                   </span>
                   View your astrologers who are accepting new members, use an
@@ -255,7 +252,7 @@ const Home = () => {
                 </li>
               </ul>
               <Link to="/astrologers">
-                <button className="btn mt-6 shadow-lg shadow-purple-200 hover:shadow-purple-300 transition-all duration-300 transform hover:-translate-y-1">
+                <button className="btn mt-6 mx-[2em] shadow-lg shadow-purple-200 hover:shadow-purple-300 transition-all duration-300 transform hover:-translate-y-1">
                   Start now
                 </button>
               </Link>
@@ -301,14 +298,14 @@ const Home = () => {
         </div>
       </section>
       {/* Great astrologers */}
-      <section className="py-16 bg-gray-50">
+      <section className="py-16">
         <div className="container">
           <div className="xl:w-[550px] mx-auto">
-            <h2 className="heading text-center relative">
+            <h2 className="heading text-center text-white relative">
               <span className="relative z-10">Our Great Astrologers</span>
-              <span className="absolute bottom-0 left-0 w-full h-3 bg-purple-200 opacity-40 z-0"></span>
+             
             </h2>
-            <p className="text__para text-center mt-4">
+            <p className="text__para text-center text-white mt-4">
               We provide world-renowned astrology services powered by expert
               knowledge and innovative technology.
             </p>
@@ -317,7 +314,7 @@ const Home = () => {
         </div>
       </section>
 
-      <section className="py-20 bg-gradient-to-b from-white via-gray-50 to-white">
+      <section className="py-20">
   <div className="max-w-7xl mx-auto px-6">
     <div className="flex flex-col lg:flex-row items-center gap-12">
       
@@ -334,10 +331,10 @@ const Home = () => {
       <div className="w-full lg:w-7/12">
         <div className="mb-8">
           <h2 className="text-3xl md:text-4xl font-bold relative inline-block">
-            <span className="relative z-10 text-gray-900">
+            <span className="relative z-10 text-white">
               Most questions asked by our clients
             </span>
-            <span className="absolute left-0 bottom-1 h-3 w-full bg-purple-200 rounded-md opacity-50 -z-10"></span>
+            
           </h2>
         </div>
         <FaqList />
@@ -349,14 +346,14 @@ const Home = () => {
 
 
       {/* Testimonials */}
-      <section className="py-16 bg-gradient-to-b from-purple-50 to-white">
+      <section className="py-16 ">
         <div className="container">
           <div className="xl:w-[550px] mx-auto">
-            <h2 className="heading text-center relative">
+            <h2 className="heading text-center text-white relative">
               <span className="relative z-10">What our clients say</span>
-              <span className="absolute bottom-0 left-0 w-full h-3 bg-purple-200 opacity-40 z-0"></span>
+              
             </h2>
-            <p className="text__para text-center mt-4">
+            <p className="text__para text-center  text-white mt-4">
               We provide world-renowned astrology services powered by expert
               knowledge and innovative technology.
             </p>

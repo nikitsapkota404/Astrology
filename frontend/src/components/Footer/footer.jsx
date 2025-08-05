@@ -50,7 +50,7 @@ const Footer = () => {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="bg-gray-100 text-gray-800 py-12 mt-10">
+    <footer className=" text-white py-12 mt-10">
       <div className="container mx-auto px-6">
         <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-4">
           {/* Logo and Social */}
@@ -124,7 +124,7 @@ const Footer = () => {
         </div>
 
         <div className="mt-12 border-t border-gray-300 pt-6 text-center text-lg">
-        &copy; {year} Developed by Nikit and Malla. All rights reserved.
+        &copy; {year} Developed by Nikit & Malla. All rights reserved.
          <p> Made with ❤️ by Nikit Sapkota and Ain Malla</p>
         </div>
       </div>

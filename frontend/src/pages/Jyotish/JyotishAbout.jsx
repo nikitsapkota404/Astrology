@@ -3,7 +3,7 @@ import { FormatDate } from "../../utils/FormatDate";
 
 const JyotishAbout = ({ name, about, qualifications, experiences }) => {
   return (
-    <div className="bg-white p-8 rounded-xl shadow-xl max-w-4xl mx-auto">
+    <div className=" p-8 rounded-xl shadow-xl max-w-4xl mx-auto">
       <div>
         <h3 className="text-3xl font-bold text-gray-800 flex items-center gap-3">
           About{" "}

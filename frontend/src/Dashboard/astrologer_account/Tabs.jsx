@@ -34,32 +34,52 @@ const Tabs = ({ tab, setTab }) => {
   };
 
   const handleDeleteAccount = async () => {
-    const token = localStorage.getItem("token"); // get token here dynamically
-    if (!token) {
-      alert("You need to be logged in as an astrologer to delete your account.");
-      return;
-    }
+  const token = localStorage.getItem("token");
+  if (!token) {
+    alert("You need to be logged in as an astrologer to delete your account.");
+    return;
+  }
 
-    try {
-      const res = await axios.delete(`${BASE_URL}/astrologers/profile/me`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+  // Confirm deletion like your first function
+  if (!window.confirm("Are you sure you want to delete your astrologer account?")) return;
 
-      if (res.status === 200 || res.status === 204) {
-        alert("Astrologer account deleted successfully.");
-        localStorage.removeItem("token");
-        dispatch({ type: "LOGOUT" });
-        navigate("/");
-      } else {
-        alert("Failed to delete astrologer account.");
-      }
-    } catch (err) {
-      console.error("Error deleting astrologer account:", err);
-      alert("Something went wrong while deleting your astrologer account.");
+  try {
+    const res = await axios.delete(`${BASE_URL}/astrologers/profile/me`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    // Log full response for debugging
+    console.log("Delete response:", res);
+
+    // If backend sends JSON with a message
+    const message = res.data?.message || "Astrologer account deleted successfully.";
+
+    if (res.status === 200 || res.status === 204) {
+      alert(message);
+      localStorage.removeItem("token");
+      dispatch({ type: "LOGOUT" });
+      navigate("/");
+    } else {
+      alert("Failed to delete astrologer account.");
     }
-  };
+  } catch (err) {
+  if (err.response) {
+    // Backend responded with error status
+    console.error("Backend error data:", err.response.data);
+    console.error("Backend status:", err.response.status);
+  } else if (err.request) {
+    // Request sent but no response
+    console.error("No response received:", err.request);
+  } else {
+    // Something else happened setting up request
+    console.error("Axios error:", err.message);
+  }
+  alert("Something went wrong while deleting your astrologer account.");
+}
+};
+
 
   return (
     <div className="relative" ref={menuRef}>

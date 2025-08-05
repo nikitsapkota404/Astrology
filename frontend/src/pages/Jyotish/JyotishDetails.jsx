@@ -1,7 +1,7 @@
 import { useState } from "react";
 import star from "./../../assets/images/Star-Icon.png";
 import JyotishAbout from "./JyotishAbout";
-import Feedback from "./feedback";
+import Feedback from "./Feedback";
 import SidePanel from "./SidePanel";
 import { BASE_URL } from "../../../config";
 import useFetchData from "../../hooks/useFetchData";
@@ -35,7 +35,7 @@ const JyotishDetails = () => {
   const [tab, setTab] = useState("about");
   
   return (
-    <section className="py-10 bg-gradient-to-b from-[#f8f9ff] to-white">
+    <section className="py-10 ">
       <div className="max-w-[1170px] px-5 mx-auto">
         {loading && <Loader />}
         {error && <Error />}

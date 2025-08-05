@@ -22,18 +22,33 @@ export const updateUser = async (req, res) => {
   }
 };
 export const deleteUser = async (req, res) => {
-    const id = req.params.id;
-    try {
-      await User.findByIdAndDelete(id);
-      res.status(200).json({
-        success: true,
-        message: "Successfully deleted.",
-      });
-    } catch (err) {
-      console.error("Delete Error:", err);
-      res.status(500).json({ success: false, message: "Failed to delete" });
+  const id = req.params.id || req.userId;
+  try {
+    const deletedUser = await User.findByIdAndDelete(id);
+    if (!deletedUser) {
+      return res.status(404).json({ success: false, message: "User not found" });
     }
-  };
+    res.status(200).json({ success: true, message: "Successfully deleted." });
+  } catch (err) {
+    console.error("Delete Error:", err);
+    res.status(500).json({ success: false, message: "Failed to delete" });
+  }
+};
+
+  export const deleteMyAccount = async (req, res) => {
+  const userId = req.userId;  // from authenticate middleware
+  try {
+    const deletedUser = await User.findByIdAndDelete(userId);
+    if (!deletedUser) {
+      return res.status(404).json({ success: false, message: "User not found" });
+    }
+    res.status(200).json({ success: true, message: "User account deleted successfully." });
+  } catch (err) {
+    console.error("Delete My Account Error:", err);
+    res.status(500).json({ success: false, message: "Failed to delete account." });
+  }
+};
+
 
   export const getOneUser = async (req, res) => {
     const id = req.params.id;

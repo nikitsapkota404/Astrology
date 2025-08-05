@@ -8,7 +8,19 @@
 
 body {
   font-family: "Manrope", sans-serif;
+  /* Combine gradient overlay and background image */
+  background: 
+    linear-gradient(
+      rgba(0, 0, 0, 0.4),      /* Black with 50% opacity */
+      rgba(66, 91, 107, 0.3)     /* Blue with 30% opacity */
+    ),
+    url("./public/bg1.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
+
+
 .swiper-pagination-bullet {
   width: 12px !important;
   height: 12px !important;
@@ -40,7 +52,7 @@ body {
 .swiper-pagination {
   top: 90% !important;
 }
-
+/* 
 
 .Sticky__header{
   width: 100%;
@@ -52,7 +64,7 @@ body {
   z-index: 99999;
   background: white;
   box-shadow: 3px 3px -8px 3px #ddd;
-}
+} */
 @media only screen and (max-width:768px){
   .navigation{
     width: 100%;
