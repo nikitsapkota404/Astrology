@@ -124,8 +124,8 @@ const Footer = () => {
         </div>
 
         <div className="mt-12 border-t border-gray-300 pt-6 text-center text-lg">
-        &copy; {year} Developed by Nikit & Malla. All rights reserved.
-         <p> Made with ❤️ by Nikit Sapkota and Ain Malla</p>
+        &copy; {year} Developed by Nikit. All rights reserved.
+         <p> Made with ❤️ by Nikit Sapkota</p>
         </div>
       </div>
     </footer>
